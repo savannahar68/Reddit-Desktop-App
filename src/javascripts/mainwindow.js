@@ -1,0 +1,150 @@
+const {
+  screen,
+  BrowserView,
+  BrowserWindow,
+  Menu,
+  ipcMain,
+} = require("electron");
+const windowState = require("electron-window-state");
+const electronLocalshortcut = require("electron-localshortcut");
+const fs = require("file-system");
+const path = require("path");
+
+const { signInURL, userAgent } = require("../config");
+const { TITLE_BAR_HEIGHT } = require("../util");
+const { createChildWindow } = require("./childwindow");
+var { template } = require("./menu");
+
+var createMainWindow = () => {
+  // Get information about the screen size.
+  const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
+  // Load the previous state with fall-back to defaults
+  const mainWindowState = windowState({
+    defaultWidth: workAreaSize.width - 200,
+    defaultHeight: workAreaSize.height - 100,
+  });
+
+  // Create the browser window.
+  win = new BrowserWindow({
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    width: mainWindowState.width,
+    height: mainWindowState.height,
+    minWidth: 300,
+    minHeight: 300,
+    backgroundColor: "#FFF",
+    titleBarStyle: "hidden",
+    center: true,
+    scrollBounce: false,
+    webPreferences: {
+      preload: path.join(__dirname, "preload.js"),
+      nodeIntegration: false,
+      contextIsolation: true,
+    },
+  });
+
+  /**
+   * Let us register listeners on the window, so we can update the state
+   * automatically (the listeners will be removed when the window is closed)
+   * and restore the maximized or full screen state
+   */
+  mainWindowState.manage(win);
+
+  const windowSettings = {
+    url: signInURL,
+  };
+
+  // win.loadURL(windowSettings.url, { userAgent });
+  let view = new BrowserView({
+    webPreferences: {
+      preload: path.join(__dirname, "preload-view.js"),
+      nodeIntegration: false,
+      contextIsolation: true,
+    },
+  });
+  win.setBrowserView(view);
+  view.setBounds({
+    x: 0,
+    y: TITLE_BAR_HEIGHT,
+    width: mainWindowState.width,
+    height: mainWindowState.height - TITLE_BAR_HEIGHT,
+  });
+  view.setAutoResize({
+    width: true,
+    height: true,
+  });
+  view.webContents.loadURL(windowSettings.url, { userAgent });
+
+  // Menu
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+
+  // Load template containing title bar
+  win.loadFile(path.join(__dirname, "../templates/index.html"));
+
+  view.webContents.once("did-finish-load", () => {
+    win.show();
+    view.webContents.focus();
+  });
+
+  // Send page title to window
+  ipcMain.on("title-request", function (e, arg) {
+    win.webContents.send(
+      "title-reply",
+      view.webContents.getTitle().split(" - ")[0]
+    );
+  });
+  view.webContents.on("page-title-updated", (e) => {
+    win.webContents.send(
+      "title-reply",
+      view.webContents.getTitle().split(" - ")[0]
+    );
+  });
+
+  // On new window, create child window
+  view.webContents.on(
+    "new-window",
+    (event, url, frameName, disposition, options) => {
+      createChildWindow(event, url, frameName, disposition, {
+        ...options,
+        pos: win.getPosition(),
+        size: win.getSize(),
+      });
+    }
+  );
+
+  win.on("close", (e) => {
+    if (BrowserWindow.getAllWindows().length > 1) {
+      e.preventDefault();
+    }
+    ipcMain.removeAllListeners("title-request");
+    if (win?.webContents) {
+      electronLocalshortcut.unregisterAll(win);
+    }
+    if (view?.webContents) {
+      electronLocalshortcut.unregisterAll(view);
+    }
+  });
+
+  // Emitted when the window is closed.
+  win.on("closed", () => {
+    win = null;
+    view = null;
+  });
+
+  electronLocalshortcut.register(view, ["CmdOrCtrl+R", "F5"], () => {
+    // No reload API for browserview yet.
+    view.webContents.loadURL(windowSettings.url, { userAgent });
+  });
+  electronLocalshortcut.register(win, ["CmdOrCtrl+R", "F5"], () => {
+    // No reload API for browserview yet.
+    view.webContents.loadURL(windowSettings.url, { userAgent });
+  });
+
+  if (process.env.NODE_ENV === "development") {
+    win.webContents.openDevTools();
+    view.webContents.openDevTools();
+  }
+};
+
+module.exports = { createMainWindow: createMainWindow };
