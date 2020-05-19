@@ -1,7 +1,8 @@
 {
   "name": "reddit-desktop-app",
   "version": "0.1.0",
-  "description": "Reddit desktop App",
+  "productName": "Reddit Desktop",
+  "description": "Reddit desktop",
   "main": "app.js",
   "scripts": {
     "start": "electron .",
