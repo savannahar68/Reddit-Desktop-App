@@ -1,6 +1,8 @@
 # Reddit-Desktop-App
-Desktop App for reddit built in Electron.
-![splash](static/rd_electron_logo.png)
+
+<p align="center">
+  <img align="center" src="https://raw.githubusercontent.com/savannahar68/Reddit-Desktop-App/master/static/rd_electron_logo.png">
+</p>
 
 ---
 
@@ -25,7 +27,10 @@ Download the [latest releases](https://github.com/savannahar68/Reddit-Desktop-Ap
 
 ![dark-shot](static/img2.png)
 
-![creator](static/img3.png)
+
+<p align="center">
+  <img align="center" src="https://raw.githubusercontent.com/savannahar68/Reddit-Desktop-App/master/static/img3.png">
+</p>
 
 ## ✏️ Development
 
