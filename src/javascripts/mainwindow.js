@@ -15,6 +15,7 @@ const { TITLE_BAR_HEIGHT } = require("../util");
 const { createChildWindow } = require("./childwindow");
 var { template } = require("./menu");
 
+let win = null;
 var createMainWindow = () => {
   // Get information about the screen size.
   const workAreaSize = screen.getPrimaryDisplay().workAreaSize;
