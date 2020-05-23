@@ -1,6 +1,8 @@
 # Reddit-Desktop-App
-Desktop App for reddit built in Electron.
-![splash](static/rd_electron_logo.png)
+
+<p align="center">
+  <img align="center" src="https://raw.githubusercontent.com/savannahar68/Reddit-Desktop-App/master/static/rd_electron_logo.png">
+</p>
 
 ---
 
@@ -9,25 +11,28 @@ Reddit Desktop is a desktop wrapper for Reddit.com built with [ElectronJS](https
 PS : Supports native dark mode :)
 
 
-## 📀 Installation
+## Installation
 
 Download the [latest releases](https://github.com/savannahar68/Reddit-Desktop-App/releases) (Releasing Soon) for **Windows**, **Linux**, or **MacOS**. Inside the zipped folder will be an executable that can be run.
 
 - For MacOS, drag the app into `Applications` folder.
 
-### 🎶 Versions
+### Versions
 
 - v0.1.0 => Releasing soon...
 
-## 📸 Action Shots
+## Screenshots
 
 ![two-window](static/img1.png)
 
 ![dark-shot](static/img2.png)
 
-![creator](static/img3.png)
 
-## ✏️ Development
+<p align="center">
+  <img align="center" src="https://raw.githubusercontent.com/savannahar68/Reddit-Desktop-App/master/static/img3.png">
+</p>
+
+##  Development
 
 To build the app locally, clone the repository, install all dependencies, and run the available npm scripts.
 
@@ -48,7 +53,7 @@ $ yarn package-mac
 
 To build production ready applications for macos (dmg), windows (exe), and linux (sh), run `yarn package-all`.
 
-🛎️ **Have suggestions?** Feel free to create an issue or make a pull request.
+**Have suggestions?** Feel free to create an issue or make a pull request.
 
 ### Dependencies
 
@@ -64,6 +69,6 @@ To build production ready applications for macos (dmg), windows (exe), and linux
 - [electron](https://ghub.io/electron): Build cross platform desktop apps with JavaScript, HTML, and CSS
 - [electron-packager](https://ghub.io/electron-packager): Customize and package your Electron app with OS-specific bundles (.app, .exe, etc.) via JS or CLI
 
-## 📜 MIT License
+## MIT License
 
 _Disclaimer: Not affiliated with Reddit._
