@@ -12,7 +12,9 @@
     "package-win": "electron-packager . 'Reddit Desktop' --overwrite --asar=true --platform=win32 --arch=ia32 --icon=static/rd.ico --prune=true --out=release-builds --version-string.CompanyName='Savan Nahar' --version-string.FileDescription='A Reddit desktop app made with Electron.' --version-string.ProductName='Reddit Desktop'",
     "package-lin": "electron-packager . 'Reddit Desktop' --overwrite --asar=true --platform=linux --arch=x64 --icon=static/rd.png --prune=true --out=release-builds",
     "package-zip": "find ./release-builds -type d -depth 1 -exec zip -r {}.zip {} \\;",
-    "build": "electron-builder --publish=never"
+    "build-win": "electron-builder --publish=never --win",
+    "build-mac": "electron-builder --publish=never --mac",
+    "build-linux": "electron-builder --publish=never --linux"
   },
   "repository": {
     "type": "git",

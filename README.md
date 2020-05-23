@@ -10,7 +10,6 @@ Reddit Desktop is a desktop wrapper for Reddit.com built with [ElectronJS](https
 
 PS : Supports native dark mode :)
 
-
 ## Installation
 
 Download the [latest releases](https://github.com/savannahar68/Reddit-Desktop-App/releases) (Releasing Soon) for **Windows**, **Linux**, or **MacOS**. Inside the zipped folder will be an executable that can be run.
@@ -27,12 +26,11 @@ Download the [latest releases](https://github.com/savannahar68/Reddit-Desktop-Ap
 
 ![dark-shot](static/img2.png)
 
-
 <p align="center">
   <img align="center" src="https://raw.githubusercontent.com/savannahar68/Reddit-Desktop-App/master/static/img3.png">
 </p>
 
-##  Development
+## Development
 
 To build the app locally, clone the repository, install all dependencies, and run the available npm scripts.
 
@@ -45,10 +43,10 @@ yarn install
 ```sh
 $ // To run locally
 $ yarn start
-$ // To build OS specific binaries 
-$ yarn package-win
-$ yarn package-lin
-$ yarn package-mac
+$ // To build OS specific binaries
+$ yarn build-win
+$ yarn build-linux
+$ yarn build-mac
 ```
 
 To build production ready applications for macos (dmg), windows (exe), and linux (sh), run `yarn package-all`.
