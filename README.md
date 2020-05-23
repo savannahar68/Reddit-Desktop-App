@@ -12,13 +12,13 @@ PS : Supports native dark mode :)
 
 ## Installation
 
-Download the [latest releases](https://github.com/savannahar68/Reddit-Desktop-App/releases) (Releasing Soon) for **Windows**, **Linux**, or **MacOS**. Inside the zipped folder will be an executable that can be run.
+Download the [latest releases](https://github.com/savannahar68/Reddit-Desktop-App/releases/tag/1.0.0) for **Windows**, **Linux**, or **MacOS**. Inside the zipped folder will be an executable that can be run.
 
 - For MacOS, drag the app into `Applications` folder.
 
 ### Versions
 
-- v0.1.0 => Releasing soon...
+- [1.0.0](https://github.com/savannahar68/Reddit-Desktop-App/releases/tag/1.0.0)
 
 ## Screenshots
 
