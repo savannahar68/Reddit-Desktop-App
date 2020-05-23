@@ -11,7 +11,8 @@
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=static/rd.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . 'Reddit Desktop' --overwrite --asar=true --platform=win32 --arch=ia32 --icon=static/rd.ico --prune=true --out=release-builds --version-string.CompanyName='Savan Nahar' --version-string.FileDescription='A Reddit desktop app made with Electron.' --version-string.ProductName='Reddit Desktop'",
     "package-lin": "electron-packager . 'Reddit Desktop' --overwrite --asar=true --platform=linux --arch=x64 --icon=static/rd.png --prune=true --out=release-builds",
-    "package-zip": "find ./release-builds -type d -depth 1 -exec zip -r {}.zip {} \\;"
+    "package-zip": "find ./release-builds -type d -depth 1 -exec zip -r {}.zip {} \\;",
+    "build": "electron-builder --publish=never"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,7 @@
     "Electron",
     "Reddit"
   ],
-  "author": "Savan Nahar",
+  "author": "Savan Naha <savannahar68@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/savannahar68/Reddit-Desktop-App/issues"
@@ -35,6 +36,7 @@
     "cross-env": "^7.0.2",
     "del": "^5.1.0",
     "electron": "^8.2.5",
+    "electron-builder": "^22.6.1",
     "electron-packager": "^14.2.1"
   },
   "dependencies": {
@@ -42,5 +44,51 @@
     "electron-localshortcut": "https://github.com/alexkim205/electron-localshortcut/tarball/master",
     "electron-window-state": "^5.0.1",
     "file-system": "^2.2.2"
+  },
+  "build": {
+    "publish": {
+      "provider": "github",
+      "owner": "savannahar68",
+      "repo": "Reddit-Desktop-App"
+    },
+    "appId": "com.savan.redditDesktopApp",
+    "productName": "Reddit-Desktop-App",
+    "copyright": "savannahar68",
+    "linux": {
+      "category": "Utility",
+      "icon": "static/rd.icns",
+      "target": [
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "mac": {
+      "icon": "static/rd.icns",
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "asar": false,
+      "icon": "static/rd.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
   }
 }
